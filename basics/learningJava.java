@@ -1,7 +1,24 @@
-/*
-Bài cũ: HelloWorld
+import java.util.Scanner;
 
-public class HelloWorld {
+public class learningJava {
+    public static void main(String[] args) {
+        ViDuGoiStudentTuFileKhac.main(args); // Bài 10 minh họa cách dùng Student từ file riêng
+    }
+
+    // Class Student được public để class ở file khác có thể dùng.
+    public static class Student {
+        public String name;
+        public int age;
+
+        public void introduce() {
+            System.out.println("Mình tên là " + name + ", " + age + " tuổi.");
+        }
+    }
+
+/*
+// Bài cũ: HelloWorld
+
+static class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
     }
@@ -11,7 +28,7 @@ public class HelloWorld {
 // =======================
 // Bài 1: Quy tắc khai báo biến
 /*
-public class QuytacKhaibaoBien {
+static class Bai01QuyTacKhaiBaoBien {
     public static void main(String[] args) {
         // Cấu trúc: kiểu dữ liệu + tên biến + giá trị ban đầu;
 
@@ -62,10 +79,11 @@ public class QuytacKhaibaoBien {
 }
 */
 
+/*
 // =======================
 // Bài 2: Các phép toán trong Java
 
-class CacPhepToan {
+static class Bai02CacPhepToan {
     public static void main(String[] args) {
         // 1. Các phép toán số học
         int firstNumber = 10;
@@ -140,6 +158,374 @@ class CacPhepToan {
         // - + giữa hai số là cộng; nếu có String thì + có thể dùng để nối chuỗi.
         // - == với String không dùng để so sánh nội dung; sẽ học cách so sánh chuỗi sau.
     }
+}
+*/
+
+/*
+// =======================
+// Bài 3: Nhập dữ liệu từ bàn phím bằng Scanner
+
+    // Mỗi bài là một class lồng bên trong class chính.
+    static class Bai03NhapDuLieuScanner {
+        public static void main(String[] args) {
+            // Scanner giúp chương trình đọc dữ liệu người dùng nhập từ bàn phím.
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Nhập tên đầy đủ: ");
+            String fullName = scanner.nextLine(); // Đọc cả dòng, có thể chứa dấu cách
+
+            System.out.print("Nhập tuổi: ");
+            int age = scanner.nextInt();          // Đọc một số nguyên
+
+            System.out.print("Nhập chiều cao (m): ");
+            double height = scanner.nextDouble(); // Đọc một số thập phân
+
+            // nextInt()/nextDouble() chỉ đọc dữ liệu đến trước dấu xuống dòng.
+            // Đọc bỏ phần xuống dòng còn lại trước khi gọi nextLine() tiếp theo.
+            scanner.nextLine();
+
+            System.out.print("Nhập môn Java bạn đang học: ");
+            String topic = scanner.nextLine();
+
+            System.out.println("\n--- Thông tin vừa nhập ---");
+            System.out.println("Tên: " + fullName);
+            System.out.println("Tuổi: " + age);
+            System.out.println("Chiều cao: " + height + " m");
+            System.out.println("Đang học: " + topic);
+
+            // Lưu ý: nhập chữ thay vì số ở tuổi/chiều cao sẽ gây lỗi.
+            // Không đóng scanner ở đây vì nó đang đọc System.in của chương trình.
+        }
+    }
+*/
+
+/*
+// =======================
+// Bài 4: Một số hàm Math thường dùng
+
+    static class Bai04HamMath {
+        public static void main(String[] args) {
+            // Math có sẵn trong Java nên không cần import thư viện.
+            // Gọi hàm theo dạng Math.tenHam(...).
+
+            // 1. Giá trị tuyệt đối: Math.abs(x)
+            double negativeNumber = -12.5;
+            double absoluteValue = Math.abs(negativeNumber);
+
+            // 2. Tìm số lớn hơn và nhỏ hơn trong hai số
+            int firstNumber = 8;
+            int secondNumber = 15;
+            int largerNumber = Math.max(firstNumber, secondNumber);
+            int smallerNumber = Math.min(firstNumber, secondNumber);
+
+            // 3. Lũy thừa và căn bậc hai
+            double baseNumber = 2.0;
+            double exponent = 3.0;
+            double power = Math.pow(baseNumber, exponent);
+
+            double numberForSquareRoot = 81.0;
+            double squareRoot = Math.sqrt(numberForSquareRoot);
+
+            // 4. Làm tròn số
+            double numberToRound = 4.6;
+            long rounded = Math.round(numberToRound); // Làm tròn đến số nguyên gần nhất
+
+            double numberToRoundDown = 4.9;
+            double roundedDown = Math.floor(numberToRoundDown); // Làm tròn xuống
+
+            double numberToRoundUp = 4.1;
+            double roundedUp = Math.ceil(numberToRoundUp); // Làm tròn lên
+
+            // 5. Tính diện tích hình tròn: PI * bán kính mũ 2
+            double radius = 3.0;
+            double radiusExponent = 2.0;
+            double radiusSquared = Math.pow(radius, radiusExponent);
+            double circleArea = Math.PI * radiusSquared;
+
+            // 6. Tạo số ngẫu nhiên từ 1 đến số mặt của xúc xắc
+            // Math.random() cho số từ 0.0 (có thể) đến nhỏ hơn 1.0.
+            int firstDiceValue = 1;
+            int numberOfDiceSides = 6;
+            double randomValue = Math.random();
+            int diceRoll = (int) (randomValue * numberOfDiceSides) + firstDiceValue;
+
+            System.out.println("Số cần tìm giá trị tuyệt đối: " + negativeNumber);
+            System.out.println("Giá trị tuyệt đối: " + absoluteValue);
+            System.out.println("Hai số đem so sánh: " + firstNumber + " và " + secondNumber);
+            System.out.println("Số lớn hơn: " + largerNumber);
+            System.out.println("Số nhỏ hơn: " + smallerNumber);
+            System.out.println(baseNumber + " mũ " + exponent + " = " + power);
+            System.out.println("Căn bậc hai của " + numberForSquareRoot + " = " + squareRoot);
+            System.out.println("Làm tròn " + numberToRound + " gần nhất: " + rounded);
+            System.out.println("Làm tròn " + numberToRoundDown + " xuống: " + roundedDown);
+            System.out.println("Làm tròn " + numberToRoundUp + " lên: " + roundedUp);
+            System.out.println("Bán kính hình tròn: " + radius);
+            System.out.println("Diện tích hình tròn: " + circleArea);
+            System.out.println("Kết quả gieo xúc xắc: " + diceRoll);
+
+            // Lưu ý: Math.pow và Math.sqrt trả về double.
+            // Math.sqrt số âm trả về NaN (không phải một số thực hợp lệ).
+        }
+    }
+*/
+
+/*
+// =======================
+// Bài 5: Câu điều kiện trong Java
+
+    static class Bai05CauDieuKien {
+        public static void main(String[] args) {
+            // 1. if: chỉ chạy phần bên trong nếu điều kiện đúng
+            int temperature = 32;
+
+            if (temperature >= 30) {
+                System.out.println("Trời nóng.");
+            }
+
+            // 2. if-else: chọn một trong hai nhánh
+            int age = 17;
+
+            if (age >= 18) {
+                System.out.println("Đủ 18 tuổi trở lên.");
+            } else {
+                System.out.println("Chưa đủ 18 tuổi.");
+            }
+
+            // 3. if-else if-else: kiểm tra nhiều trường hợp theo thứ tự
+            int score = 78;
+
+            if (score >= 90) {
+                System.out.println("Xếp loại: A");
+            } else if (score >= 80) {
+                System.out.println("Xếp loại: B");
+            } else if (score >= 70) {
+                System.out.println("Xếp loại: C");
+            } else {
+                System.out.println("Xếp loại: cần cố gắng thêm");
+            }
+
+            // 4. Kết hợp điều kiện bằng && (và), || (hoặc), ! (phủ định)
+            int requiredAge = 18;
+            boolean hasTicket = true;
+            boolean meetsAgeRequirement = age >= requiredAge;
+
+            if (meetsAgeRequirement && hasTicket) {
+                System.out.println("Được vào xem phim.");
+            } else {
+                System.out.println("Chưa đủ điều kiện vào xem phim.");
+            }
+
+            boolean isRaining = false;
+            boolean isHot = temperature >= 30;
+
+            if (isHot || isRaining) {
+                System.out.println("Hôm nay thời tiết có thể gây bất tiện.");
+            }
+
+            if (!isRaining) {
+                System.out.println("Hôm nay trời không mưa.");
+            }
+
+            // Lưu ý thường gặp:
+            // - Điều kiện trong if phải cho ra true hoặc false.
+            // - Dùng == để so sánh; dấu = là phép gán giá trị.
+            // - Trong chuỗi else if, kiểm tra trường hợp cụ thể/lớn hơn trước.
+            // - Dùng { } để gom các câu lệnh thuộc cùng một nhánh.
+        }
+    }
+*/
+
+/*
+// =======================
+// Bài 6: Câu lệnh switch
+
+    static class Bai06Switch {
+        public static void main(String[] args) {
+            // 1. Dùng switch để chọn một trường hợp theo giá trị số nguyên
+            int selectedMenu = 2;
+            String selectedAction;
+
+            switch (selectedMenu) {
+                case 1:
+                    selectedAction = "Bắt đầu học";
+                    break;
+                case 2:
+                    selectedAction = "Xem bài học";
+                    break;
+                case 3:
+                    selectedAction = "Thoát chương trình";
+                    break;
+                default:
+                    selectedAction = "Lựa chọn không hợp lệ";
+                    break;
+            }
+
+            System.out.println("Lựa chọn " + selectedMenu + ": " + selectedAction);
+
+            // 2. switch cũng có thể kiểm tra giá trị String
+            String trafficLight = "yellow";
+            String instruction;
+
+            switch (trafficLight) {
+                case "green":
+                    instruction = "Được đi";
+                    break;
+                case "yellow":
+                    instruction = "Đi chậm và chú ý";
+                    break;
+                case "red":
+                    instruction = "Dừng lại";
+                    break;
+                default:
+                    instruction = "Màu đèn không hợp lệ";
+                    break;
+            }
+
+            System.out.println("Đèn " + trafficLight + ": " + instruction);
+
+            // Lưu ý thường gặp:
+            // - Mỗi case là một giá trị cần so sánh với biến trong switch.
+            // - break kết thúc switch sau khi chạy xong case phù hợp.
+            //   Quên break có thể khiến chương trình chạy tiếp các case phía dưới.
+            // - default chạy khi không case nào khớp; đây là phần tùy chọn.
+            // - Dùng if khi cần điều kiện dạng khoảng, ví dụ score >= 80.
+        }
+    }
+*/
+
+/*
+// =======================
+// Bài 7: Vòng lặp for và while
+
+    static class Bai07VongLapForWhile {
+        public static void main(String[] args) {
+            // 1. for: thường dùng khi biết trước số lần lặp
+            // Cấu trúc: for (khởi tạo; điều kiện; bước cập nhật)
+            for (int count = 1; count <= 5; count++) {
+                System.out.println("for - lần thứ " + count);
+            }
+
+            // Dùng for để tính tổng các số từ 1 đến 5
+            int sum = 0;
+
+            for (int number = 1; number <= 5; number++) {
+                sum = sum + number;
+            }
+
+            System.out.println("Tổng từ 1 đến 5: " + sum);
+
+            // 2. while: lặp khi điều kiện còn đúng
+            int countdown = 3;
+
+            while (countdown > 0) {
+                System.out.println("while - còn " + countdown);
+                countdown--;
+            }
+
+            System.out.println("Bắt đầu!");
+
+            // while có thể không chạy lần nào nếu điều kiện ban đầu sai
+            int startingNumber = 5;
+
+            while (startingNumber < 3) {
+                System.out.println("Dòng này sẽ không được in");
+                startingNumber++;
+            }
+
+            // Lưu ý thường gặp:
+            // - for gồm khởi tạo; điều kiện; bước cập nhật, ngăn cách bằng dấu ;
+            // - while cần tự cập nhật biến trong thân vòng lặp.
+            // - Nếu điều kiện không bao giờ sai, vòng lặp có thể chạy mãi.
+            // - Kiểm tra dấu <, <=, >, >= để tránh lặp thiếu hoặc thừa lần.
+        }
+    }
+*/
+
+/*
+// =======================
+// Bài 8: Mảng một chiều
+
+    static class Bai08Mang {
+        public static void main(String[] args) {
+            // 1. Tạo mảng có 3 phần tử; các phần tử int ban đầu bằng 0
+            int numberOfScores = 3;
+            int[] scores = new int[numberOfScores];
+
+            // Chỉ số phần tử bắt đầu từ 0
+            scores[0] = 85;
+            scores[1] = 92;
+            scores[2] = 78;
+            System.out.println("Điểm trong mảng tạo bằng new: "
+                    + scores[0] + ", " + scores[1] + ", " + scores[2]);
+
+            // 2. Khai báo và gán sẵn các phần tử
+            int[] testScores = {85, 92, 78, 100};
+            String[] subjects = {"Toán", "Văn", "Java"};
+
+            int firstScore = testScores[0];
+            int lastScore = testScores[testScores.length - 1];
+
+            // Có thể thay đổi giá trị phần tử sau khi tạo mảng
+            testScores[2] = 80;
+
+            System.out.println("Điểm đầu tiên: " + firstScore);
+            System.out.println("Điểm cuối cùng ban đầu: " + lastScore);
+            System.out.println("Điểm thứ ba sau khi cập nhật: " + testScores[2]);
+            System.out.println("Môn học đầu tiên: " + subjects[0]);
+            System.out.println("Số môn học: " + subjects.length);
+
+            // 3. Duyệt mảng bằng for khi cần biết vị trí phần tử
+            int totalScore = 0;
+
+            for (int index = 0; index < testScores.length; index++) {
+                int currentScore = testScores[index];
+                totalScore = totalScore + currentScore;
+                System.out.println("Điểm ở vị trí " + index + ": " + currentScore);
+            }
+
+            double averageScore = (double) totalScore / testScores.length;
+            System.out.println("Điểm trung bình: " + averageScore);
+
+            // 4. Duyệt bằng for-each khi chỉ cần lấy từng giá trị
+            for (int currentScore : testScores) {
+                System.out.println("Một điểm trong mảng: " + currentScore);
+            }
+
+            // Lưu ý thường gặp:
+            // - Mảng có độ dài cố định sau khi được tạo.
+            // - Chỉ số bắt đầu từ 0; chỉ số cuối là length - 1.
+            // - Truy cập testScores[testScores.length] sẽ vượt phạm vi mảng.
+            // - length là thuộc tính của mảng, không có dấu ngoặc như length().
+            // - Dùng for-each để đọc lần lượt giá trị; dùng for thường khi cần vị trí.
+        }
+    }
+*/
+
+/*
+// =======================
+// Bài 9: Class và object
+
+    static class Bai09ClassVaObject {
+        public static void main(String[] args) {
+            // new tạo một object từ class Student.
+            Student firstStudent = new Student();
+            firstStudent.name = "An";
+            firstStudent.age = 20;
+
+            Student secondStudent = new Student();
+            secondStudent.name = "Bình";
+            secondStudent.age = 21;
+
+            // Mỗi object có dữ liệu riêng, dù được tạo từ cùng một class.
+            firstStudent.introduce();
+            secondStudent.introduce();
+        }
+    }
+*/
+
+// =======================
+// Bài 10: Dùng class Student từ file khác
+// Ví dụ chạy thật nằm trong basics/ViDuGoiStudentTuFileKhac.java.
 }
 
 
