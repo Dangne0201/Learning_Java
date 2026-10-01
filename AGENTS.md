@@ -25,7 +25,7 @@
 - Giải thích ngắn gọn dự định sửa gì trước khi thay đổi mã, rồi chỉ sửa những gì cần cho yêu cầu hiện tại.
 - Dùng `basics/learningJava.java` làm file học chính. Chỉ tạo file Java khác khi người học yêu cầu ví dụ nhiều file hoặc nội dung cần minh họa việc gọi qua file khác.
 - File `basics/learningJava.java` có một `public class learningJava` bên ngoài. Các bài thông thường là class lồng bên trong; khi thêm bài, comment bài trước, chèn `// =======================`, thêm class theo nội dung bài, rồi đổi lời gọi trong `learningJava.main`. Ví dụ nhiều file phải giữ tên file khớp với class `public` và được biên dịch cùng nhau.
-- Đặt file `.class` sinh ra trong `basics/out`, không để lẫn cạnh mã nguồn. Cấu hình Run Code phải biên dịch tất cả file `.java` trong `basics` vào thư mục output rồi chạy class theo file đang mở; giữ thiết lập tương ứng cho Java Extension.
+- Đặt file `.class` sinh ra trong `basics/out`, không để lẫn cạnh mã nguồn. Cấu hình Run Code phải biên dịch tất cả file `.java` trong `basics` và các thư mục con vào thư mục output rồi chạy class theo file đang mở; giữ thiết lập tương ứng cho Java Extension.
 - Giữ cấu hình UTF-8 hiện có cho cả hai cách chạy trong VS Code.
 - Chỉ tạo thêm thư mục hoặc tài liệu khi người học cần chúng; không tạo sẵn cấu trúc rỗng. Chỉ dùng chủ đề OOP và collections khi người học yêu cầu.
 - Dùng tên class bài học theo `PascalCase` (class chính giữ tên `learningJava` theo yêu cầu), tên biến/phương thức `camelCase`; giữ ví dụ nhỏ, dễ đọc và nhất quán với trình độ hiện tại.

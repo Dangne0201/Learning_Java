@@ -2,16 +2,97 @@ import java.util.Scanner;
 
 public class learningJava {
     public static void main(String[] args) {
-        ViDuGoiStudentTuFileKhac.main(args); // Bài 10 minh họa cách dùng Student từ file riêng
+        Bai13Encapsulation.main(args); // Đổi bài được gọi ở đây khi thêm bài mới
     }
 
     // Class Student được public để class ở file khác có thể dùng.
     public static class Student {
         public String name;
+        public String favoriteSubject;
         public int age;
 
+        // Hàm tạo không tham số: đặt giá trị ban đầu khi chưa truyền dữ liệu.
+        public Student() {
+            name = "Chưa nhập tên";
+            favoriteSubject = "chưa chọn môn";
+            age = 0;
+        }
+
+        // Hàm tạo có tham số: nhận dữ liệu rồi gán vào các thuộc tính.
+        public Student(String name, String favoriteSubject, int age) {
+            this.name = name;
+            this.favoriteSubject = favoriteSubject;
+            this.age = age;
+        }
+
         public void introduce() {
-            System.out.println("Mình tên là " + name + ", " + age + " tuổi.");
+            System.out.println("Mình tên là " + name + ", " + age
+                    + " tuổi và thích học " + favoriteSubject + ".");
+        }
+
+        // String là kiểu dữ liệu trả về: phương thức gửi một chuỗi về chỗ được gọi.
+        public String getIntroduction() {
+            return "Mình tên là " + name + ", " + age
+                    + " tuổi và thích học " + favoriteSubject + ".";
+        }
+
+        // boolean trả về true hoặc false.
+        public boolean isAdult() {
+            return age >= 18;
+        }
+
+        // int trả về số nguyên; yearsFromNow là dữ liệu phương thức nhận vào.
+        public int calculateAgeIn(int yearsFromNow) {
+            return age + yearsFromNow;
+        }
+    }
+
+    // Ví dụ thành viên với các mức truy cập khác nhau.
+    public static class AccessSample {
+        public int publicValue = 10;
+        protected int protectedValue = 20;
+        int packageValue = 30; // Không ghi modifier: chỉ truy cập được trong cùng package
+        private int privateValue = 40;
+
+        public int getPrivateValue() {
+            // privateValue chỉ được truy cập trực tiếp bên trong AccessSample.
+            return privateValue;
+        }
+    }
+
+    // Encapsulation (đóng gói) là giữ dữ liệu trong class và kiểm soát cách code bên ngoài truy cập dữ liệu.
+    public static class EncapsulatedStudent {
+        // private: code bên ngoài class không thể truy cập trực tiếp các field này.
+        private String name;
+        private int age;
+
+        // Hàm tạo nhận dữ liệu ban đầu khi tạo object.
+        public EncapsulatedStudent(String name, int age) {
+            this.name = name; // this.name là field; name là tham số của hàm tạo.
+            setAge(age); // Gọi setter để kiểm tra cả tuổi ban đầu.
+        }
+
+        // Getter: phương thức cho phép code bên ngoài đọc giá trị.
+        public String getName() {
+            return name; // return gửi giá trị về chỗ gọi phương thức.
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        // Setter: phương thức cho phép code bên ngoài yêu cầu thay đổi giá trị.
+        public void setName(String newName) {
+            name = newName; // Gán tên mới vào field name.
+        }
+
+        public void setAge(int newAge) {
+            // Kiểm tra dữ liệu trước khi thay đổi field age.
+            if (newAge >= 0) {
+                age = newAge;
+            } else {
+                System.out.println("Tuổi không hợp lệ; giữ nguyên tuổi hiện tại.");
+            }
         }
     }
 
@@ -523,9 +604,113 @@ static class Bai02CacPhepToan {
     }
 */
 
+/*
 // =======================
 // Bài 10: Dùng class Student từ file khác
 // Ví dụ chạy thật nằm trong basics/ViDuGoiStudentTuFileKhac.java.
+*/
+
+/*
+// =======================
+// Bài 11: Định nghĩa hàm tạo
+
+    static class Bai11HamTao {
+        public static void main(String[] args) {
+            // Hàm tạo không tham số chạy khi dùng new Student().
+            Student studentWithoutData = new Student();
+            System.out.println("Object dùng hàm tạo không tham số:");
+            studentWithoutData.introduce();
+
+            // Chuẩn bị dữ liệu trước khi truyền vào hàm tạo.
+            String studentName = "Chi";
+            String favoriteSubject = "Java";
+            int studentAge = 19;
+
+            // Hàm tạo có tham số gán các giá trị này vào object mới.
+            Student studentWithData = new Student(studentName, favoriteSubject, studentAge);
+            System.out.println("Object dùng hàm tạo có tham số:");
+            studentWithData.introduce();
+
+            // this.name là thuộc tính của object; name là tham số truyền vào.
+            // Hàm tạo cùng tên class và không ghi kiểu trả về, kể cả void.
+            // Khi đã tự định nghĩa hàm tạo, Java không tự tạo hàm tạo rỗng nữa;
+            // vì vậy ta định nghĩa Student() riêng để vẫn tạo object không tham số.
+        }
+    }
+*/
+
+/*
+// =======================
+// Bài 12: Access modifier, package và kế thừa
+
+    static class Bai12AccessModifiers {
+        public static void main(String[] args) {
+            System.out.println("--- Access modifier ---");
+            AccessModifierExample.showAccessLevels();
+
+            System.out.println("--- Package ---");
+            // PackageExample nằm trong package vidu.app và import StudentProfile
+            // từ package vidu.model. Xem hai file trong thư mục basics/vidu.
+            vidu.app.PackageExample.showExample();
+
+            System.out.println("--- Kế thừa ---");
+            String studentName = "Lan";
+            int studentAge = 20;
+            String favoriteSubject = "Java";
+
+            Student student = new Student(studentName, studentAge, favoriteSubject);
+            student.introduce(); // Phương thức được kế thừa từ Person
+            student.study();     // Phương thức riêng của Student
+        }
+
+        // Person là class cha: chứa dữ liệu và hành vi dùng chung.
+        static class Person {
+            protected String name; // Class con có thể truy cập thành viên này
+            private int age;       // Chỉ Person được truy cập trực tiếp age
+
+            public Person(String name, int age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            public int getAge() {
+                return age; // Class khác lấy tuổi qua phương thức public
+            }
+
+            public void introduce() {
+                System.out.println("Tên: " + name + ", tuổi: " + getAge());
+            }
+        }
+
+        // Student extends Person nghĩa là Student kế thừa từ Person.
+        static class Student extends Person {
+            private String favoriteSubject;
+
+            public Student(String name, int age, String favoriteSubject) {
+                super(name, age); // Gọi hàm tạo của class cha Person
+                this.favoriteSubject = favoriteSubject;
+            }
+
+            public void study() {
+                // Student dùng được name (protected) và getAge() (public).
+                // Student không thể truy cập trực tiếp age vì age là private.
+                System.out.println(name + " đang học " + favoriteSubject
+                        + " ở tuổi " + getAge() + ".");
+            }
+        }
+    }
+*/
+
+// =======================
+// Bài 13: Encapsulation (đóng gói)
+
+    static class Bai13Encapsulation {
+        public static void main(String[] args) {
+            System.out.println("--- Encapsulation ---");
+            AccessModifierExample.showEncapsulation();
+        }
+    }
+
 }
 
 

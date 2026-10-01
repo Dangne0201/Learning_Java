@@ -18,8 +18,8 @@ Mở Terminal tại thư mục dự án rồi chạy:
 chcp 65001
 cd basics
 New-Item -ItemType Directory -Force out | Out-Null
-javac -encoding UTF-8 -d out *.java
+javac -encoding UTF-8 -d out (Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName })
 java '-Dfile.encoding=UTF-8' -cp out learningJava
 ```
 
-Máy hiện có JDK 17. Các bài học chính nằm trong `basics/learningJava.java`; ví dụ Bài 10 dùng thêm `basics/ViDuGoiStudentTuFileKhac.java` để minh họa việc một file Java thực sự gọi class từ file khác. Hai file được biên dịch cùng nhau, còn các file `.class` được đặt trong `basics/out` để tách khỏi mã nguồn. Cấu hình Run Code và Java Extension đều dùng thư mục này làm nơi chứa file biên dịch. Cấu hình VS Code đặt UTF-8 cho các cách chạy đã thiết lập.
+Máy hiện có JDK 17. Các bài học chính nằm trong `basics/learningJava.java`; ví dụ Bài 10 dùng thêm `basics/ViDuGoiStudentTuFileKhac.java` để minh họa việc một file Java thực sự gọi class từ file khác. Bài 12 gồm access modifier, package và kế thừa; ví dụ package nằm trong `basics/vidu/`, nơi `PackageExample.java` import `StudentProfile.java` từ package khác. Các file `.java` trong `basics` và thư mục con được biên dịch cùng nhau; file `.class` được đặt trong `basics/out` để tách khỏi mã nguồn. Cấu hình Run Code và Java Extension dùng thư mục này làm nơi chứa file biên dịch. Cấu hình VS Code đặt UTF-8 cho các cách chạy đã thiết lập.

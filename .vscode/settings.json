@@ -11,6 +11,10 @@
         "basics"
     ],
     "java.project.outputPath": "basics/out",
+    "java.inlayHints.parameterNames.enabled": "none",
+    "[java]": {
+        "editor.inlayHints.enabled": "off"
+    },
     "java.debug.settings.vmArgs": "-Dfile.encoding=UTF-8",
     "java.debug.settings.console": "integratedTerminal",
     "terminal.integrated.automationProfile.windows": {
@@ -23,7 +27,7 @@
         ]
     },
     "code-runner.executorMap": {
-        "java": "cd $dir && chcp 65001 && New-Item -ItemType Directory -Force out | Out-Null; javac -encoding UTF-8 -d out *.java && java '-Dfile.encoding=UTF-8' -cp out $fileNameWithoutExt"
+        "java": "cd $dir && chcp 65001 && New-Item -ItemType Directory -Force out | Out-Null; javac -encoding UTF-8 -d out (Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName }); if ($LASTEXITCODE -eq 0) { java '-Dfile.encoding=UTF-8' -cp out $fileNameWithoutExt }"
     },
     "code-runner.runInTerminal": true
 }
